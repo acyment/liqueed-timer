@@ -1,0 +1,48 @@
+
+#timer-container{
+  background-color: #FF0000;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items:flex-end;
+  justify-content: center;
+}
+
+.flashing-animation{
+  -webkit-animation: rubberBand 1s infinite;
+  -moz-animation: rubberBand 1s infinite;
+  animation: rubberBand 1s infinite;
+}
+
+#timer{
+    width:93%;
+    height: 93%;
+}
+
+@media all and (orientation:portrait) {
+    #timer{flex-direction: column;align-items: center;display: flex;}
+    .mainDigit{font-size: 120vw; flex:3;align-items: center;display: flex;}
+    .secondaryDigit{font-size: 40vw; flex:1;}
+    .onlyDigit{font-size: 120vw; flex:3;align-items: center;display: flex;}
+}
+
+@media all and (orientation:landscape) {
+    #timer{display: table;}
+    #side {display: table-cell;width: 22%;}
+    .mainDigit{display: table-cell;font-size: 110vh;width: auto;width:56%;text-align: center;line-height: 86vh;}
+    .secondaryDigit{display: table-cell;font-size: 20vh;width:22%;text-align: center;}
+    .onlyDigit{display: table-cell;font-size: 110vh;text-align: center;line-height: 80vh;vertical-align: middle;}
+}
+
+.mainDigit{
+  color: #FFFFFF;
+  justify-content: center;
+}
+
+.secondaryDigit{
+  color: #FFFFFF;
+}
+
+.onlyDigit{
+  color: #FFFFFF;
+}
