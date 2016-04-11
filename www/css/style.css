@@ -1,48 +1,188 @@
+@import url("fonts/fonts-stylesheet.css");
 
-#timer-container{
+.timer-container {
   background-color: #FF0000;
   width: 100%;
   height: 100%;
   display: flex;
-  align-items:flex-end;
+  align-items: flex-end;
   justify-content: center;
 }
-
-.flashing-animation{
+.flashing-animation {
   -webkit-animation: rubberBand 1s infinite;
   -moz-animation: rubberBand 1s infinite;
   animation: rubberBand 1s infinite;
 }
-
-#timer{
-    width:93%;
-    height: 93%;
+.timer {
+  width: 93%;
+  height: 93%;
 }
 
 @media all and (orientation:portrait) {
-    #timer{flex-direction: column;align-items: center;display: flex;}
-    .mainDigit{font-size: 120vw; flex:3;align-items: center;display: flex;}
-    .secondaryDigit{font-size: 40vw; flex:1;}
-    .onlyDigit{font-size: 120vw; flex:3;align-items: center;display: flex;}
+  .timer {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+  }
+  .mainDigit {
+    font-size: 75vw;
+    flex: 3;
+    align-items: center;
+    display: flex;
+  }
+  .secondaryDigit {
+    font-size: 35vw;
+    flex: 1;
+  }
+  .onlyDigit {
+    font-size: 75vw;
+    flex: 3;
+    align-items: center;
+    display: flex;
+  }
 }
-
 @media all and (orientation:landscape) {
-    #timer{display: table;}
-    #side {display: table-cell;width: 22%;}
-    .mainDigit{display: table-cell;font-size: 110vh;width: auto;width:56%;text-align: center;line-height: 86vh;}
-    .secondaryDigit{display: table-cell;font-size: 20vh;width:22%;text-align: center;}
-    .onlyDigit{display: table-cell;font-size: 110vh;text-align: center;line-height: 80vh;vertical-align: middle;}
+  .timer {
+    display: table;
+  }
+  .side {
+    display: table-cell;
+    width: 22%;
+  }
+  .mainDigit {
+    display: table-cell;
+    font-size: 110vh;
+    width: auto;
+    width: 56%;
+    text-align: center;
+    line-height: 86vh;
+  }
+  .secondaryDigit {
+    display: table-cell;
+    font-size: 20vh;
+    width: 22%;
+    text-align: center;
+  }
+  .onlyDigit {
+    display: table-cell;
+    font-size: 110vh;
+    text-align: center;
+    line-height: 80vh;
+    vertical-align: middle;
+  }
 }
-
-.mainDigit{
+.mainDigit {
   color: #FFFFFF;
   justify-content: center;
+  font-family: "robotoblack";
 }
-
-.secondaryDigit{
+.secondaryDigit {
+  color: #FFFFFF;
+  font-family: "robotoblack";
+}
+.onlyDigit {
+  font-family: "robotoblack";
   color: #FFFFFF;
 }
-
-.onlyDigit{
-  color: #FFFFFF;
+.presetsMenu {
+  opacity: 0;
+  position: relative;
+  transform: scale(0);
+  transition: all 0.4s ease-out;
+}
+.open.circle {
+  opacity: 1;
+  -o-transform: scale(1);
+  -ms-transform: scale(1);
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  transform: scale(1);
+}
+.help-button{
+  position: absolute;
+  bottom: 1%;
+  left: 1%;
+  color: white;
+  opacity: 0.5;
+}
+.help-overlay{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  background-color: black;
+  z-index: 10000;
+  top:0;
+  left:0;
+}
+.help-stopped{
+  height: 100%;
+}
+.help-stopped-minutes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  height: 100%;
+}
+.help-stopped-seconds{
+  right:0;
+  bottom: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  height: 22vh;
+  width: 14vw;
+  position: absolute;
+  margin-right: 7vw;
+}
+@media all and (orientation:portrait) {
+  .help-stopped-seconds{
+    visibility: hidden;
+  }
+}
+.help-label{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.help-text{
+  color: white;
+  font-family: 'amatic_scregular';
+  font-size:7vh;
+}
+.help-text-small{
+  color: white;
+  font-family: 'amatic_scregular';
+  font-size:4vh;
+}
+.help-icon-tap{
+  width:10vh;
+  height: auto;
+}
+.help-icon-swipe-up{
+  height: 18vh;
+  width: auto;
+}
+.help-icon-swipe-down{
+  height: 18vh;
+  width: auto;
+}
+.help-icon-swipe-up-small{
+  height: 8vh;
+  width: auto;
+}
+.help-icon-swipe-down-small{
+  height: 8vh;
+  width: auto;
+}
+.help-flashing{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }

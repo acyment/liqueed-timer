@@ -3,12 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
-    <title></title>
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src &apos;self&apos; &apos;unsafe-inline&apos;; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos;">
+    <title>Agilar Timer</title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet" type="text/css">
+    <link href="css/animate.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/fonts/fonts-stylesheet.css" rel="stylesheet" type="text/css" charset="utf-8">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -16,32 +17,80 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
-
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <script src="js/controllers/timerController.js"></script>
 
     <!-- Libs -->
-     <script src="lib/momentjs/min/moment.min.js"></script>
-     <script src="lib/momentjs/min/locales.min.js"></script>
-     <script src="lib/humanize-duration/humanize-duration.js"></script>
-     <script src="lib/angular-timer/dist/angular-timer.js"></script>
+    <script src="lib/momentjs/min/moment.min.js"></script>
+    <script src="lib/momentjs/min/locales.min.js"></script>
+    <script src="lib/humanize-duration/humanize-duration.js"></script>
+    <script src="lib/angular-timer/dist/angular-timer.js"></script>
+    <script src="lib/angular-help-overlay/lib/angular-help-overlay.min.js"></script>
 
   </head>
-  <body ng-app="agilar-timer" ng-controller="TimerCtrl">
-        <ion-pane id="timer-container" on-double-tap="onDoubleTap()" on-hold="onHold()" on-swipe-up="onSwipeUp()" on-swipe-down="onSwipeDown()">
-          <timer id="timer" auto-start="false" countdown="startingTime" interval="1000" ng-class="{&apos;flashing-animation&apos;:flashing}" finish-callback="finished()">
+  <body ng-app="agilar-timer" ng-controller="TimerController">
+    <ion-pane class="timer-container" on-double-tap="onDoubleTap()" on-hold="onHold()" help-overlay="showHelp">
+      <timer class="timer" auto-start="false" countdown="startingTime" interval="1000" ng-class="{&apos;flashing-animation&apos;:flashing}" finish-callback="finished()">
 
-              <div ng-show="minutes&gt;=1" id="side"></div>
-              <div ng-show="minutes&gt;=1" class="mainDigit">{{minutes}}</div>
-              <div ng-show="minutes&gt;=1" class="secondaryDigit">{{seconds}}</div>
+        <div ng-show="minutes&gt;=1" class="side"></div>
+        <div ng-show="minutes&gt;=1" class="mainDigit" on-swipe-up="onMinutesSwipeUp()" on-swipe-down="onMinutesSwipeDown()">{{minutes}}</div>
+        <div ng-show="minutes&gt;=1" class="secondaryDigit" on-swipe-up="onSecondsSwipeUp()" on-swipe-down="onSecondsSwipeDown()">{{seconds}}</div>
 
-              <div ng-show="minutes==0" class="onlyDigit" ng-bind="seconds"></div>
-        </timer></ion-pane>
+        <div ng-show="minutes==0" class="onlyDigit" on-swipe-up="onSecondsSwipeUp()" on-swipe-down="onSecondsSwipeDown()">{{seconds}}</div>
+      </timer>
+      <a class="help-button button button-icon icon ion-help-circled" on-tap="showHelp = true"></a>
+      <div class="help-overlay" ng-show="showHelp" on-tap="showHelp = false" ng-switch="timerState">
+          <div class="help-stopped" ng-switch-when="STOPPED">
+            <div class="help-stopped-minutes">
+              <div class="help-label">
+                <img class="help-icon-swipe-up" src="img/swipe-up.png">
+                <span class="help-text">Swipe up</span>
+              </div>
+              <div class="help-label">
+                <img class="help-icon-tap" src="img/double-tap.png">
+                <span class="help-text">Double-tap to start</span>
+              </div>
+              <div class="help-label">
+                <span class="help-text">Swipe down</span>
+                <img class="help-icon-swipe-down" src="img/swipe-down.png">
+              </div>
+            </div>
+            <div class="help-stopped-seconds">
+              <div class="help-label">
+                <img class="help-icon-swipe-up-small" src="img/swipe-up.png">
+                <span class="help-text-small">Swipe up</span>
+              </div>
+              <div class="help-label">
+                <span class="help-text-small">Swipe down</span>
+                <img class="help-icon-swipe-down-small" src="img/swipe-down.png">
+              </div>
+            </div>
+          </div>
+
+          <div class="help-flashing" ng-switch-when="FLASHING">
+            <img class="help-icon-tap" src="img/double-tap.png">
+            <span class="help-text">Double-tap to reset</span>
+          </div>
+
+          <div class="help-flashing" ng-switch-when="TICKING">
+            <span class="help-text">Double-tap to pause</span>
+            <img class="help-icon-tap" src="img/double-tap.png">
+            <span class="help-text">Hold to reset</span>
+          </div>
+
+          <div class="help-flashing" ng-switch-when="PAUSED">
+            <span class="help-text">Double-tap to resume</span>
+            <img class="help-icon-tap" src="img/double-tap.png">
+            <span class="help-text">Hold to reset</span>
+          </div>
+      </div>
+
+    </ion-pane>
   </body>
 </html>
