@@ -20,7 +20,11 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    {
+      "locator": "https://github.com/testfairy/testfairy-cordova-plugin",
+      "id": "com.testfairy.cordova-plugin"
+    }
   ],
   "cordovaPlatforms": [
     "ios",

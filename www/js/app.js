@@ -4,6 +4,8 @@ angular.module('agilar-timer', ['ionic', 'ngCordova', 'ngAnimate', 'timer'])
 .run(function($ionicPlatform) {
 
   $ionicPlatform.ready(function() {
+    TestFairy.begin('a48444e1ca35a94f9cc95030f658496ddf750739');
+
     if (window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)

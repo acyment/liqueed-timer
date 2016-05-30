@@ -1,7 +1,7 @@
 @import url("fonts/fonts-stylesheet.css");
 
 .timer-container {
-  background-color: #FF0000;
+  background-color: red;
   width: 100%;
   height: 100%;
   display: flex;
@@ -16,6 +16,7 @@
 .timer {
   width: 93%;
   height: 93%;
+  background-color: #FF0000;
 }
 
 @media all and (orientation:portrait) {

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src &apos;self&apos; &apos;unsafe-inline&apos;; script-src &apos;self&apos; &apos;unsafe-inline&apos; &apos;unsafe-eval&apos;">
-    <title>Agilar Timer</title>
+    <title>Liqueed Timer</title>
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet" type="text/css">
     <link href="css/animate.css" rel="stylesheet" type="text/css">
@@ -35,7 +35,7 @@
 
   </head>
   <body ng-app="agilar-timer" ng-controller="TimerController">
-    <ion-pane class="timer-container" on-double-tap="onDoubleTap()" on-hold="onHold()" help-overlay="showHelp">
+    <ion-pane class="timer-container" on-double-tap="onDoubleTap()" on-hold="onHold()" help-overlay="showHelp"  >
       <timer class="timer" auto-start="false" countdown="startingTime" interval="1000" ng-class="{&apos;flashing-animation&apos;:flashing}" finish-callback="finished()">
 
         <div ng-show="minutes&gt;=1" class="side"></div>
